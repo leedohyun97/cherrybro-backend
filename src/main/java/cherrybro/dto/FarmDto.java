@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FarmDto {
 	
-	//농장 번호(PK)
+	//농장 고유 번호(PK)
 	private Long farmNo;
 	
 	//농장 이름
