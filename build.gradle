@@ -1,0 +1,54 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.4'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.itwil.shop'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//웹 기능 (Controller, RestController 등 사용 가능)
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//JPA (DB 연동 및 ORM 기능 - Entity, Repository 등 사용)
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	//롬복 (Getter/Setter 자동 생성 - 코드 간결화)
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	//개발 중 자동 리로딩 (저장 시 서버 자동 재시작)
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	//MySQL JDBC 드라이버 (Spring Boot가 DB에 연결할 수 있게 함)
+	//runtimeOnly 'mysql:mysql-connector-j'
+
+
+	//테스트 관련 라이브러리 (JUnit 등)
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//JUnit 실행 플랫폼 (테스트 런타임용)
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
