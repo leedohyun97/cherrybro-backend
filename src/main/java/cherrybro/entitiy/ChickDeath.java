@@ -1,10 +1,9 @@
-package cherrybro.entitiy.chick;
+package cherrybro.entitiy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import cherrybro.entitiy.farm.Farm;
-import cherrybro.entitiy.farm.FarmSection;
+import cherrybro.dto.ChickDeathDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -47,15 +46,21 @@ public class ChickDeath {
 	private FarmSection farmSection;//농장동 고유 번호(FK)
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/************************************************************/
+	/* DTO -> Entity */	
+	public static ChickDeath toEntity(ChickDeathDto chickDeathDto) {
+	    FarmSection farmSection = FarmSection.builder()
+	            .farmSectionNo(chickDeathDto.getFarmSectionNo())
+	            .build();
+
+	    return ChickDeath.builder()
+	            .chickDeathNo(chickDeathDto.getChickDeathNo())
+	            .chickDeathNumber(chickDeathDto.getChickDeathNumber())
+	            .chickDeathDate(chickDeathDto.getChickDeathDate())
+	            .chickDeathCreateAt(chickDeathDto.getChickDeathCreateAt())
+	            .farmSection(farmSection)
+	            .build();
+	}
 	
 	
 }

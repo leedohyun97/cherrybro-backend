@@ -4,6 +4,7 @@ package cherrybro.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import cherrybro.entitiy.ChickEntry;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,5 +31,18 @@ public class ChickEntryDto {
 	
 	//농장동 고유 번호(FK)
 	private Long farmSectionNo;
+	
+	/************************************************************/
+	/* DTO -> Entity */	
+	public static ChickEntryDto toDto(ChickEntry chickEntry) {
+	    return ChickEntryDto.builder()
+	            .chickEntryNo(chickEntry.getChickEntryNo())
+	            .chickEntryNumber(chickEntry.getChickEntryNumber())
+	            .chickEntryDate(chickEntry.getChickEntryDate())
+	            .chickEntryCreateAt(chickEntry.getChickEntryCreateAt())
+	            .farmSectionNo(chickEntry.getFarmSection().getFarmSectionNo())
+	            .build();
+	}
+	
 	
 }
