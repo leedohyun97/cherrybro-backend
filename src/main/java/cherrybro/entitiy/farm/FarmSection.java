@@ -1,6 +1,9 @@
 package cherrybro.entitiy.farm;
 
-import cherrybro.entitiy.users.Users;
+import java.util.List;
+
+import cherrybro.entitiy.chick.ChickDeath;
+import cherrybro.entitiy.chick.ChickEntry;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,9 +36,17 @@ public class FarmSection {
 	@Column(name = "farm_section_name")//실제 DB 컬럼 이름
 	private String farmSectionName;//농장동 이름(1동, 2동, 3동)
 	
-	@JoinColumn(name = "farm_no")//실제 DB 컬럼 이름
+	@JoinColumn(name = "farm_no")//외래 키(FK)로 사용할 컬럼
 	@ManyToOne(fetch = FetchType.LAZY)//N:1 관계 매핑, 지연 로딩 사용
 	private Farm farm;//농장 고유 번호(FK)
 	
+	/************************************************************/
+
+	/* 한 농장동이 여러개의 입추수수 보유 가능 */
+	@OneToMany(mappedBy = "farmSection", fetch = FetchType.LAZY)
+	private List<ChickEntry> chickEntries;
 	
+	/* 한 농장동이 여러개의 도태폐사 보유 가능 */
+	@OneToMany(mappedBy = "farmSection", fetch = FetchType.LAZY)
+	private List<ChickDeath> chickDeaths;
 }
