@@ -1,12 +1,16 @@
 package cherrybro.entitiy.users;
 
+import java.util.List;
+
+import cherrybro.entitiy.farm.Farm;
 import cherrybro.entitiy.role.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,5 +48,11 @@ public class Users {
 	
 	@Column(name = "users_role")//실제 DB 컬럼 이름
 	private Role usersRole;//사용자 권한(관리자, 농장주)
+	
+	/************************************************************/
+	
+	/* 한 명의 사용자가 여러개의 농장 보유 가능 */
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+	private List<Farm> farms;
 	
 }
