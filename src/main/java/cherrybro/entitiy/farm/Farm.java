@@ -1,5 +1,7 @@
 package cherrybro.entitiy.farm;
 
+import java.util.List;
+
 import cherrybro.entitiy.users.Users;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,8 +35,14 @@ public class Farm {
 	@Column(name = "farm_name")//실제 DB 컬럼 이름
 	private String farmName;//농장 이름
 	
-	@JoinColumn(name = "users_no")//실제 DB 컬럼 이름
+	@JoinColumn(name = "users_no")//외래 키(FK)로 사용할 컬럼
 	@ManyToOne(fetch = FetchType.LAZY)//N:1 관계 매핑, 지연 로딩 사용
 	private Users users;//사용자 고유 번호(FK)
+
+	/************************************************************/
+
+	/* 한 농장이 여러개의 농장동 보유 가능 */
+	@OneToMany(mappedBy = "farm", fetch = FetchType.LAZY)
+	private List<FarmSection> farmSections;
 	
 }
