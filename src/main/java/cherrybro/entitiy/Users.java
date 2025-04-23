@@ -1,8 +1,8 @@
-package cherrybro.entitiy.users;
+package cherrybro.entitiy;
 
 import java.util.List;
 
-import cherrybro.entitiy.farm.Farm;
+import cherrybro.dto.UsersDto;
 import cherrybro.entitiy.role.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -54,5 +54,20 @@ public class Users {
 	/* 한 명의 사용자가 여러개의 농장 보유 가능 */
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<Farm> farms;
+	
+	
+	/* DTO -> Entity */
+	public static Users toEntity(UsersDto usersDto) {
+		return Users.builder()
+				.usersNo(usersDto.getUsersNo())
+				.usersId(usersDto.getUsersId())
+				.usersPassword(usersDto.getUsersPassword())
+				.usersName(usersDto.getUsersName())
+				.usersEmail(usersDto.getUsersEmail())
+				.usersPhone(usersDto.getUsersPhone())
+				.usersRole(usersDto.getUsersRole())
+				.build();
+	}
+	
 	
 }

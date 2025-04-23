@@ -1,8 +1,8 @@
-package cherrybro.entitiy.farm;
+package cherrybro.entitiy;
 
 import java.util.List;
 
-import cherrybro.entitiy.users.Users;
+import cherrybro.dto.FarmDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -44,5 +44,20 @@ public class Farm {
 	/* 한 농장이 여러개의 농장동 보유 가능 */
 	@OneToMany(mappedBy = "farm", fetch = FetchType.LAZY)
 	private List<FarmSection> farmSections;
+
+	/************************************************************/
 	
+	/* DTO -> Entity */
+	public static Farm toEntity(FarmDto farmDto) {
+		
+		Users users = Users.builder()
+				.usersNo(farmDto.getUsersNo())
+				.build();
+		
+		return Farm.builder()
+				.farmNo(farmDto.getFarmNo())
+				.farmName(farmDto.getFarmName())
+				.users(users)
+				.build();
+	}
 }

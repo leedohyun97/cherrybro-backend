@@ -1,9 +1,8 @@
-package cherrybro.entitiy.farm;
+package cherrybro.entitiy;
 
 import java.util.List;
 
-import cherrybro.entitiy.chick.ChickDeath;
-import cherrybro.entitiy.chick.ChickEntry;
+import cherrybro.dto.FarmSectionDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -49,4 +48,20 @@ public class FarmSection {
 	/* 한 농장동이 여러개의 도태폐사 보유 가능 */
 	@OneToMany(mappedBy = "farmSection", fetch = FetchType.LAZY)
 	private List<ChickDeath> chickDeaths;
+	
+
+	/************************************************************/
+	/* DTO -> Entity */
+	public static FarmSection toEntity(FarmSectionDto farmSectionDto) {
+	    // farm 객체는 farm_no만 설정해서 참조용으로 생성
+	    Farm farm = Farm.builder()
+	            .farmNo(farmSectionDto.getUsersNo()) // usersNo는 farmNo로 사용한 게 맞는지 확인 필요
+	            .build();
+
+	    return FarmSection.builder()
+	            .farmSectionNo(farmSectionDto.getFarmSectionNo())
+	            .farmSectionName(farmSectionDto.getFarmSectionName())
+	            .farm(farm)
+	            .build();
+	}
 }
