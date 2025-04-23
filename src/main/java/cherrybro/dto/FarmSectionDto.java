@@ -15,7 +15,7 @@ public class FarmSectionDto {
 	private Long farmSectionNo;
 	
 	//농장동 이름(1동, 2동, 3동)
-	private String farmName;
+	private String farmSectionName;
 	
 	//사용자(농장 주인) 번호(FK)
 	private Long usersNo;
