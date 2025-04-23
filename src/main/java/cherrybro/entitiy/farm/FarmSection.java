@@ -30,7 +30,7 @@ public class FarmSection {
 	
 	@Id//기본 키(PK) 지정
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//MySQL의 AUTO_INCREMENT 사용
-	@Column(name = "farm_section")//실제 DB 컬럼 이름
+	@Column(name = "farm_section_no")//실제 DB 컬럼 이름
 	private Long farmSectionNo;//농장동 고유 번호(PK)
 	
 	@Column(name = "farm_section_name")//실제 DB 컬럼 이름

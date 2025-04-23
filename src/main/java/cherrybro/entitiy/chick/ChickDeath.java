@@ -30,7 +30,7 @@ public class ChickDeath {
 	
 	@Id//기본 키(PK) 지정
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//MySQL의 AUTO_INCREMENT 사용
-	@Column(name = "chick_death")//실제 DB 컬럼 이름
+	@Column(name = "chick_death_no")//실제 DB 컬럼 이름
 	private Long chickDeathNo;//도태폐사 고유 번호(PK)
 	
 	@Column(name = "chick_death_number")//실제 DB 컬럼 이름
