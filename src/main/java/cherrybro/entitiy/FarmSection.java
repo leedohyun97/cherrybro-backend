@@ -55,11 +55,10 @@ public class FarmSection {
 	public static FarmSection toEntity(FarmSectionDto farmSectionDto) {
 	    // farm 객체는 farm_no만 설정해서 참조용으로 생성
 	    Farm farm = Farm.builder()
-	            .farmNo(farmSectionDto.getUsersNo()) // usersNo는 farmNo로 사용한 게 맞는지 확인 필요
+	            .farmNo(farmSectionDto.getFarmNo())
 	            .build();
 
 	    return FarmSection.builder()
-	            .farmSectionNo(farmSectionDto.getFarmSectionNo())
 	            .farmSectionName(farmSectionDto.getFarmSectionName())
 	            .farm(farm)
 	            .build();

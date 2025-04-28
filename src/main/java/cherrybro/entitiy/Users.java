@@ -59,7 +59,6 @@ public class Users {
 	/* DTO -> Entity */
 	public static Users toEntity(UsersDto usersDto) {
 		return Users.builder()
-				.usersNo(usersDto.getUsersNo())
 				.usersId(usersDto.getUsersId())
 				.usersPassword(usersDto.getUsersPassword())
 				.usersName(usersDto.getUsersName())

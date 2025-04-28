@@ -54,7 +54,6 @@ public class ChickDeath {
 	            .build();
 
 	    return ChickDeath.builder()
-	            .chickDeathNo(chickDeathDto.getChickDeathNo())
 	            .chickDeathNumber(chickDeathDto.getChickDeathNumber())
 	            .chickDeathDate(chickDeathDto.getChickDeathDate())
 	            .chickDeathCreateAt(chickDeathDto.getChickDeathCreateAt())

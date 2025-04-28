@@ -48,14 +48,13 @@ public class ChickEntry {
 	
 
 	/************************************************************/
-	/* Entity -> DTO */
+	/* DTO -> Entity */
 	public static ChickEntry toEntity(ChickEntryDto chickEntryDto) {
 	    FarmSection farmSection = FarmSection.builder()
 	            .farmSectionNo(chickEntryDto.getFarmSectionNo())
 	            .build();
 
 	    return ChickEntry.builder()
-	            .chickEntryNo(chickEntryDto.getChickEntryNo())
 	            .chickEntryNumber(chickEntryDto.getChickEntryNumber())
 	            .chickEntryDate(chickEntryDto.getChickEntryDate())
 	            .chickEntryCreateAt(chickEntryDto.getChickEntryCreateAt())

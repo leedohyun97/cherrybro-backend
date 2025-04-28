@@ -55,7 +55,6 @@ public class Farm {
 				.build();
 		
 		return Farm.builder()
-				.farmNo(farmDto.getFarmNo())
 				.farmName(farmDto.getFarmName())
 				.users(users)
 				.build();
