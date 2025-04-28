@@ -37,17 +37,56 @@ public class UsersServiceImpl implements UsersService {
 	
 	/* 회원 수정 */
 	@Override
-	public UsersDto updateUser(UsersDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+	public UsersDto updateUser(UsersDto usersDto) {
+		try {
+			//수정할 사용자 조회
+			Users user = usersRepository.findByUsersNo(usersDto.getUsersNo())
+					.orElseThrow(() -> new RuntimeException("해당 사용자를 찾을 수 없습니다."));
+
+			//수정할 필드 적용
+			user.setUsersName(usersDto.getUsersName());
+			user.setUsersEmail(usersDto.getUsersEmail());
+			user.setUsersPhone(usersDto.getUsersPhone());
+			user.setUsersPassword(usersDto.getUsersPassword());
+			user.setUsersRole(usersDto.getUsersRole());
+
+			//수정된 사용자 저장
+			Users updateUser = usersRepository.save(user);
+
+			//Entity -> DTO 변환
+			return UsersDto.toDto(updateUser);
+
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			//에러 메시지 전달
+			throw new RuntimeException("회원 수정 중 오류 발생", e);
+		}
 	}
+
 	
 	/* 회원 삭제 */
 	@Override
 	public UsersDto deleteUser(Long usersNo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			//삭제할 사용자 조회
+			Users user = usersRepository.findByUsersNo(usersNo)
+					.orElseThrow(() -> new RuntimeException("해당 사용자를 찾을 수 없습니다."));
+
+			//삭제
+			usersRepository.delete(user);
+
+			//삭제된 사용자 정보를 DTO로 반환
+			return UsersDto.toDto(user);
+
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			//에러 메시지 전달
+			throw new RuntimeException("회원 삭제 중 오류 발생", e);
+		}
 	}
+
 	
 	/* 회원 조회 */
 	@Override
