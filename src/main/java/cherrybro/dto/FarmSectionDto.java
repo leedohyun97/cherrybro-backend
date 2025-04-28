@@ -18,8 +18,8 @@ public class FarmSectionDto {
 	//농장동 이름(1동, 2동, 3동)
 	private String farmSectionName;
 	
-	//사용자(농장 주인) 번호(FK)
-	private Long usersNo;
+	//농장 번호(FK)
+	private Long farmNo;
 	
 	/************************************************************/
 	/* DTO -> Entity */	
@@ -27,7 +27,7 @@ public class FarmSectionDto {
 	    return FarmSectionDto.builder()
 	            .farmSectionNo(farmSection.getFarmSectionNo())
 	            .farmSectionName(farmSection.getFarmSectionName())
-	            .usersNo(farmSection.getFarm().getUsers().getUsersNo()) // 사용자 번호를 꺼내기 위해 관계 따라 접근
+	            .farmNo(farmSection.getFarm().getFarmNo())
 	            .build();
 	}
 	
