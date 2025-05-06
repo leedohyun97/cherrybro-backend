@@ -17,13 +17,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import cherrybro.auth.PrincipalDetails;
 import cherrybro.dto.UsersDto;
 import cherrybro.response.Response;
 import cherrybro.response.ResponseMessage;
 import cherrybro.response.ResponseStatusCode;
 import cherrybro.service.UsersService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.springframework.security.core.Authentication;
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin//리액트 API 호출 허용
@@ -158,10 +160,16 @@ public class UsersRestController {
 	}
 
 	/* 회원 조회 */
-	@Operation(summary = "회원 조회")
-	@GetMapping("/{usersNo}")
-	public ResponseEntity<Response<UsersDto>> getUser(@PathVariable("usersNo") Long usersNo) {
+	@Operation(summary = "회원 조회(토큰)")
+	@SecurityRequirement(name = "BearerAuth")//API 엔드포인트가 인증을 요구한다는 것을 문서화(Swagger에서 JWT인증을 명시
+	@GetMapping
+	public ResponseEntity<Response<UsersDto>> getUser(Authentication authentication) {
 		try {
+			
+			PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+			
+			Long usersNo = principalDetails.getUsersNo();
+			
 			//사용자 번호로 사용자 조회
 			UsersDto usersDto = usersService.findUserById(usersNo);
 			
