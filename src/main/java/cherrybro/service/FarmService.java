@@ -17,6 +17,9 @@ public interface FarmService {
 	//농장 가져오기
 	FarmDto findFarmById(Long farmNo);
 	
+	//사용자 고유번호로 농장 가져오기
+	FarmDto findFarmByUsersNo(Long usersNo);
+	
 	//농장 리스트 가져오기
 	List<FarmDto> findFarms();
 	
