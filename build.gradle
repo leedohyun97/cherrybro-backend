@@ -49,9 +49,27 @@ dependencies {
 	//JUnit 실행 플랫폼 (테스트 런타임용)
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	
+	//@NotNull, @Size, @Email, @Min, @Max 같은 유효성 검사 애너테이션을 사용
 	implementation 'org.hibernate:hibernate-validator:6.2.0.Final'
-	implementation 'org.glassfish:jakarta.el:5.0.0'
-
+	
+	/* ———————————————————————— Security ————————————————————————*/
+	/* Spring Security의 기본 의존성. 인증 및 권한 부여를 위한 핵심 기능 포함. */
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	
+	/* Spring Security의 테스트 기능을 제공. 인증, 권한 부여 테스트 시 유용. */
+	testImplementation 'org.springframework.security:spring-security-test'
+	
+	/* JWT 토큰 생성/파싱을 위한 기본 API (인터페이스 정의 포함) */
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	
+	/* JWT 내부 로직 구현체 (runtimeOnly로 실행 시에만 필요) */
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	
+	/* JWT에서 JSON 처리를 위한 Jackson 지원 (claims 등 JSON 직렬화/역직렬화 시 필요) */
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	
+	//Java 객체 <-> JSON 변환을 위한 Google의 Gson 라이브러리
+	implementation 'com.google.code.gson:gson:2.10.1'
 }
 
 tasks.named('test') {
