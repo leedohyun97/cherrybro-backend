@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cherrybro.auth.PrincipalDetails;
 import cherrybro.dto.UsersDto;
+import cherrybro.dto.UsersJoinDto;
 import cherrybro.response.Response;
 import cherrybro.response.ResponseMessage;
 import cherrybro.response.ResponseStatusCode;
+import cherrybro.service.UsersJoinService;
 import cherrybro.service.UsersService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -36,10 +38,12 @@ public class UsersRestController {
 	
 	private final UsersService usersService;
 	
+	private final UsersJoinService usersJoinService;
+	
 	/* 회원 가입 */
 	@Operation(summary = "회원 가입")
 	@PostMapping
-	public ResponseEntity<Response<UsersDto>> createUser(@RequestBody UsersDto usersDto) {
+	public ResponseEntity<Response<UsersDto>> createUser(@RequestBody UsersJoinDto usersJoinDto) {
 		try {
 			//응답 객체 생성
 			Response<UsersDto> response = new Response<>();
@@ -49,7 +53,7 @@ public class UsersRestController {
 			httpHeaders.setContentType(new MediaType(MediaType.APPLICATION_JSON, Charset.forName("UTF-8")));
 			
 			//저장
-			UsersDto saveUsersDto = usersService.saveUser(usersDto);
+			UsersDto saveUsersDto = usersJoinService.saveUser(usersJoinDto);
 			
 			//응답 객체 설정
 			response.setStatus(ResponseStatusCode.CREATED_USER_SUCCESS);
