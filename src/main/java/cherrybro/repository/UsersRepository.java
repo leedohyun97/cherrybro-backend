@@ -8,4 +8,7 @@ public interface UsersRepository extends JpaRepository<Users, Long>{
 	
 	//사용자 고유 번호로 회원 조회
 	Optional<Users> findByUsersNo(Long usersNo);
+	
+	//사용자 ID로 회원 조회
+	Optional<Users> findByUsersId(String usersId);
 }
