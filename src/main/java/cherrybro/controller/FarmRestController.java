@@ -160,11 +160,12 @@ public class FarmRestController {
 
 	/* 농장 조회 */
 	@Operation(summary = "농장 조회")
-	@GetMapping("/{farmNo}")
-	public ResponseEntity<Response<FarmDto>> getFarm(@PathVariable("farmNo") Long farmNo) {
+	@GetMapping("/{usersNo}")
+	public ResponseEntity<Response<FarmDto>> getFarm(@PathVariable("usersNo") Long usersNo) {
 		try {
+			
 			//사용자 번호로 사용자 조회
-			FarmDto farmDto = farmService.findFarmById(farmNo);
+			FarmDto farmDto = farmService.findFarmByUsersNo(usersNo);
 			
 			//응답 객체 생성
 			Response<FarmDto> response = new Response<>();
