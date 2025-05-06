@@ -120,5 +120,24 @@ public class FarmServiceImpl implements FarmService {
 			throw new RuntimeException("농장 리스트 조회 중 오류 발생", e);
 		}
 	}
+
+	@Override
+	public FarmDto findFarmByUsersNo(Long usersNo) {
+		try {
+			//사용자 고유 번호로 농장 조회
+			Farm findFarm = farmRepository.findByUsersNo(usersNo)
+					//NULL값 발생 시 예외 발생
+					.orElseThrow(() -> new RuntimeException("해당 농장을 찾을 수 없습니다."));
+			
+			//Entity -> DTO 변환 후 반환
+			return FarmDto.toDto(findFarm);
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			//에러 메시지 전달
+			throw new RuntimeException("농장 조회 중 오류 발생", e);
+		}
+	}
 	
 }
