@@ -11,6 +11,6 @@ public interface FarmRepository extends JpaRepository<Farm, Long>{
 	Optional<Farm> findByFarmNo(Long farmNo);
 	
 	//농장 고유 번호로 농장 조회
-	Optional<Farm> findByUsersNo(Long usersNo);
+	Optional<Farm> findByUsersUsersNo(Long usersNo);
 	
 }

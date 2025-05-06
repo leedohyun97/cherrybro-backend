@@ -125,7 +125,7 @@ public class FarmServiceImpl implements FarmService {
 	public FarmDto findFarmByUsersNo(Long usersNo) {
 		try {
 			//사용자 고유 번호로 농장 조회
-			Farm findFarm = farmRepository.findByUsersNo(usersNo)
+			Farm findFarm = farmRepository.findByUsersUsersNo(usersNo)
 					//NULL값 발생 시 예외 발생
 					.orElseThrow(() -> new RuntimeException("해당 농장을 찾을 수 없습니다."));
 			
