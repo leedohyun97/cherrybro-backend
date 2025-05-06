@@ -1,5 +1,6 @@
 package cherrybro.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import cherrybro.dto.UsersDto;
 import cherrybro.entitiy.Users;
@@ -12,6 +13,8 @@ public class UsersServiceImpl implements UsersService {
 	
 	private final UsersRepository usersRepository;
 	
+	private final PasswordEncoder passwordEncoder;
+	
 	/* 회원가입 */
 	@Override
 	public UsersDto saveUser(UsersDto usersDto) {
@@ -19,6 +22,8 @@ public class UsersServiceImpl implements UsersService {
 			
 			//DTO -> Entity 변환
 			Users user = Users.toEntity(usersDto);
+			
+			user.setUsersPassword(passwordEncoder.encode(user.getUsersPassword()));
 			
 			//Entity객체 저장(회원가입)
 			Users saveUser = usersRepository.save(user);
