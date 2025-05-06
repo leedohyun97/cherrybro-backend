@@ -6,10 +6,10 @@ import cherrybro.entitiy.Users;
 public interface UsersService {
 	
 	//회원가입
-	UsersDto saveUser(UsersDto dto);
+	UsersDto saveUser(UsersDto usersDto);
 	
 	//회원수정
-	UsersDto updateUser(UsersDto dto);
+	UsersDto updateUser(UsersDto usersDto);
 	
 	//회원탈퇴
 	UsersDto deleteUser(Long usersNo);
