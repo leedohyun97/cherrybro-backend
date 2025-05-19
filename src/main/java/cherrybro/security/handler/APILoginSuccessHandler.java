@@ -46,7 +46,7 @@ public class APILoginSuccessHandler implements AuthenticationSuccessHandler {
         cookie.setHttpOnly(false);       // JavaScript에서도 접근 가능하게 설정
         cookie.setSecure(false);         // HTTPS만 허용하려면 true
         cookie.setPath("/");             // 모든 경로에서 쿠키 접근 가능
-        cookie.setMaxAge(60 * 60 * 24);  // 1일 유지
+        cookie.setMaxAge(60 * 60 * 24);  // 1시간 유지
 
         // 6. 응답에 쿠키 추가
         response.addCookie(cookie);
