@@ -22,4 +22,10 @@ public interface ChickDeathService {
 	//도태폐기 리스트 가져오기
 	List<ChickDeathDto> findChickDeathByFarmSectionNo(Long farmSectionNo);
 	
+	//모든 도태폐기 리스트 가져오기
+	List<ChickDeathDto> findAllChickDeath();
+	
+	// 농장동별 누적 폐사합 조회, 없으면 0 반환
+	Integer getTotalChickDeathNumberByFarmSectionNo(Long farmSectionNo);
+	
 }

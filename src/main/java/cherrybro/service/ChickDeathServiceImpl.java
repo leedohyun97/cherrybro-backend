@@ -118,4 +118,39 @@ public class ChickDeathServiceImpl implements ChickDeathService {
 		}
 	}
 
+	@Override
+	public List<ChickDeathDto> findAllChickDeath() {
+		try {
+			//농장 고유 번호로 도태폐기 리스트 조회
+			List<ChickDeath> chickDeaths = chickDeathRepository.findAll();
+			
+			//Stream을 사용해 Entity -> DTO 변환 후 반환
+			return chickDeaths.stream()
+					.map(ChickDeathDto::toDto)
+					.toList();
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			//에러 메시지 전달
+			throw new RuntimeException("모든 도태폐기 리스트 조회 중 오류 발생", e);
+		}
+	}
+
+	@Override
+	public Integer getTotalChickDeathNumberByFarmSectionNo(Long farmSectionNo) {
+		try {
+			//농장동 번호로 폐사 수 누적합 조회
+			Integer totalDeath = chickDeathRepository.getTotalChickDeathNumberByFarmSectionNo(farmSectionNo); 
+			
+			return totalDeath;
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			//에러 메시지 전달
+			throw new RuntimeException("폐사 수 누적합 조회 중 오류 발생", e);
+		}
+	}
+
 }

@@ -21,4 +21,10 @@ public interface ChickEntryService {
 	
 	//농장동 고유 번호로 입추수수 리스트 가져오기
 	List<ChickEntryDto> findChickEntriesByFarmSectionNo(Long farmSectionNo);
+	
+	//모든 입추수수 리스트 가져오기
+	List<ChickEntryDto> findAllChickEntries();
+	
+	// 농장동별 누적 입추합 조회, 없으면 0 반환
+	Integer getTotalChickEntryNumberByFarmSectionNo(Long farmSectionNo);
 }

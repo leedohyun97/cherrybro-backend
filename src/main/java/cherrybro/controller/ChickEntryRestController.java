@@ -235,5 +235,82 @@ public class ChickEntryRestController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	/* 입추수수 리스트 조회 */
+	@Operation(summary = "모든 입추수수 목록 조회(관리자용)")
+	@GetMapping("/list/all")
+	public ResponseEntity<Response<List<ChickEntryDto>>> getChickEntriesByFarmSection() {
+		try {
+			
+			//농장동 번호로 입추수수 조회
+			List<ChickEntryDto> chickEntryDtoList = chickEntryService.findAllChickEntries();
+			
+			//응답 객체 생성
+			Response<List<ChickEntryDto>> response = new Response<>();
+			
+			//인코딩 타입 설정
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType(MediaType.APPLICATION_JSON, Charset.forName("UTF-8")));
+			
+			//응답 객체 설정
+			response.setStatus(ResponseStatusCode.READ_CHICK_ENTRY_LIST_SUCCESS);
+			response.setMessage(ResponseMessage.READ_CHICK_ENTRY_LIST_SUCCESS);
+			response.setData(chickEntryDtoList);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, httpHeaders, HttpStatus.OK);
 
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			
+			//에러 응답 객체 반환
+			Response<List<ChickEntryDto>> response = new Response<>();
+			response.setStatus(ResponseStatusCode.READ_CHICK_ENTRY_LIST_FAIL);
+			response.setMessage(ResponseMessage.READ_CHICK_ENTRY_LIST_FAIL);
+			response.setData(null);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/* 입추 수 누적합 조회 */
+	@Operation(summary = "입추 수 누적합 조회")
+	@GetMapping("/list/total")
+	public ResponseEntity<Response<Integer>> getTotalChickEntryNumberByFarmSectionNo(@RequestParam("farmSectionNo") Long farmSectionNo) {
+		try {
+			
+			Integer totalEntry = chickEntryService.getTotalChickEntryNumberByFarmSectionNo(farmSectionNo);
+			
+			//응답 객체 생성
+			Response<Integer> response = new Response<>();
+			
+			//인코딩 타입 설정
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType(MediaType.APPLICATION_JSON, Charset.forName("UTF-8")));
+			
+			//응답 객체 설정
+			response.setStatus(ResponseStatusCode.READ_CHICK_ENTRY_TOTAL_SUCCESS);
+			response.setMessage(ResponseMessage.READ_CHICK_ENTRY_TOTAL_SUCCESS);
+			response.setData(totalEntry);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, httpHeaders, HttpStatus.OK);
+
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			
+			//에러 응답 객체 반환
+			Response<Integer> response = new Response<>();
+			response.setStatus(ResponseStatusCode.READ_CHICK_ENTRY_TOTAL_FAIL);
+			response.setMessage(ResponseMessage.READ_CHICK_ENTRY_TOTAL_FAIL);
+			response.setData(0);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 }
