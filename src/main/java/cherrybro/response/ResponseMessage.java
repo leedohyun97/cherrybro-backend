@@ -47,26 +47,45 @@ public class ResponseMessage {
     public static final String READ_CHICK_ENTRY_LIST_SUCCESS = "입추수수 목록 조회 성공";
     public static final String UPDATE_CHICK_ENTRY_SUCCESS = "입추수수 수정 성공";
     public static final String DELETE_CHICK_ENTRY_SUCCESS = "입추수수 삭제 성공";
-
+    public static final String READ_CHICK_ENTRY_TOTAL_SUCCESS = "입추수수 누적합 조회 성공";
+    
     public static final String CREATED_CHICK_ENTRY_FAIL = "입추수수 등록 실패";
     public static final String READ_CHICK_ENTRY_FAIL = "입추수수 조회 실패";
     public static final String READ_CHICK_ENTRY_LIST_FAIL = "입추수수 목록 조회 실패";
     public static final String UPDATE_CHICK_ENTRY_FAIL = "입추수수 수정 실패";
     public static final String DELETE_CHICK_ENTRY_FAIL = "입추수수 삭제 실패";
-
+    public static final String READ_CHICK_ENTRY_TOTAL_FAIL = "입추수수 누적합 조회 실패";
+    
     /******************* CHICK_DEATH 메시지 ************************/
-    public static final String CREATED_CHICK_DEATH_SUCCESS = "도태폐기 등록 성공";
-    public static final String READ_CHICK_DEATH_SUCCESS = "도태폐기 조회 성공";
-    public static final String READ_CHICK_DEATH_LIST_SUCCESS = "도태폐기 목록 조회 성공";
-    public static final String UPDATE_CHICK_DEATH_SUCCESS = "도태폐기 수정 성공";
-    public static final String DELETE_CHICK_DEATH_SUCCESS = "도태폐기 삭제 성공";
-
-    public static final String CREATED_CHICK_DEATH_FAIL = "도태폐기 등록 실패";
-    public static final String READ_CHICK_DEATH_FAIL = "도태폐기 조회 실패";
-    public static final String READ_CHICK_DEATH_LIST_FAIL = "도태폐기 목록 조회 실패";
-    public static final String UPDATE_CHICK_DEATH_FAIL = "도태폐기 수정 실패";
-    public static final String DELETE_CHICK_DEATH_FAIL = "도태폐기 삭제 실패";
-
+    public static final String CREATED_CHICK_DEATH_SUCCESS = "폐사 등록 성공";
+    public static final String READ_CHICK_DEATH_SUCCESS = "폐사 조회 성공";
+    public static final String READ_CHICK_DEATH_LIST_SUCCESS = "폐사 목록 조회 성공";
+    public static final String UPDATE_CHICK_DEATH_SUCCESS = "폐사 수정 성공";
+    public static final String DELETE_CHICK_DEATH_SUCCESS = "폐사 삭제 성공";
+    public static final String READ_CHICK_DEATH_TOTAL_SUCCESS = "폐사 수 누적합 조회 성공";
+    
+    public static final String CREATED_CHICK_DEATH_FAIL = "폐사 등록 실패";
+    public static final String READ_CHICK_DEATH_FAIL = "폐사 조회 실패";
+    public static final String READ_CHICK_DEATH_LIST_FAIL = "폐사 목록 조회 실패";
+    public static final String UPDATE_CHICK_DEATH_FAIL = "폐사 수정 실패";
+    public static final String DELETE_CHICK_DEATH_FAIL = "폐사 삭제 실패";
+    public static final String READ_CHICK_DEATH_TOTAL_FAIL = "폐사 수 누적합 조회 실패";
+    
+    /******************* CHICK_DISPOSAL 메시지 ************************/
+    public static final String CREATED_CHICK_DISPOSAL_SUCCESS = "도사 등록 성공";
+    public static final String READ_CHICK_DISPOSAL_SUCCESS = "도사 조회 성공";
+    public static final String READ_CHICK_DISPOSAL_LIST_SUCCESS = "도사 목록 조회 성공";
+    public static final String UPDATE_CHICK_DISPOSAL_SUCCESS = "도사 수정 성공";
+    public static final String DELETE_CHICK_DISPOSAL_SUCCESS = "도사 삭제 성공";
+    public static final String READ_CHICK_DISPOSAL_TOTAL_SUCCESS = "도사 수 누적합 조회 성공";
+    
+    public static final String CREATED_CHICK_DISPOSAL_FAIL = "도사 등록 실패";
+    public static final String READ_CHICK_DISPOSAL_FAIL = "도사 조회 실패";
+    public static final String READ_CHICK_DISPOSAL_LIST_FAIL = "도사 목록 조회 실패";
+    public static final String UPDATE_CHICK_DISPOSAL_FAIL = "도사 수정 실패";
+    public static final String DELETE_CHICK_DISPOSAL_FAIL = "도사 삭제 실패";
+    public static final String READ_CHICK_DISPOSAL_TOTAL_FAIL = "도사 수 누적합 조회 실패";
+    	
     /******************* 공통 오류 메시지 ************************/
     public static final String INTERNAL_SERVER_ERROR = "서버 내부 오류가 발생했습니다.";
 }

@@ -47,26 +47,45 @@ public class ResponseStatusCode {
     public static final int READ_CHICK_ENTRY_LIST_SUCCESS = 2032;
     public static final int UPDATE_CHICK_ENTRY_SUCCESS = 2033;
     public static final int DELETE_CHICK_ENTRY_SUCCESS = 2034;
-
+    public static final int READ_CHICK_ENTRY_TOTAL_SUCCESS = 2035;
+    
     public static final int CREATED_CHICK_ENTRY_FAIL = 4030;
     public static final int READ_CHICK_ENTRY_FAIL = 4031;
     public static final int READ_CHICK_ENTRY_LIST_FAIL = 4032;
     public static final int UPDATE_CHICK_ENTRY_FAIL = 4033;
-    public static final int DELETE_CHICK_ENTRY_FAIL = 4034;
-
+    public static final int DELETE_CHICK_ENTRY_FAIL = 4034;	
+    public static final int READ_CHICK_ENTRY_TOTAL_FAIL = 4035;
+    
     /******************* CHICK_DEATH 메시지 ************************/
     public static final int CREATED_CHICK_DEATH_SUCCESS = 2040;
     public static final int READ_CHICK_DEATH_SUCCESS = 2041;
     public static final int READ_CHICK_DEATH_LIST_SUCCESS = 2042;
     public static final int UPDATE_CHICK_DEATH_SUCCESS = 2043;
     public static final int DELETE_CHICK_DEATH_SUCCESS = 2044;
+    public static final int READ_CHICK_DEATH_TOTAL_SUCCESS = 2045;
 
     public static final int CREATED_CHICK_DEATH_FAIL = 4040;
     public static final int READ_CHICK_DEATH_FAIL = 4041;
     public static final int READ_CHICK_DEATH_LIST_FAIL = 4042;
     public static final int UPDATE_CHICK_DEATH_FAIL = 4043;
     public static final int DELETE_CHICK_DEATH_FAIL = 4044;
-
+    public static final int READ_CHICK_DEATH_TOTAL_FAIL = 4045;
+    
+    /******************* CHICK_DISPOSAL 메시지 ************************/
+    public static final int CREATED_CHICK_DISPOSAL_SUCCESS = 2050;
+    public static final int READ_CHICK_DISPOSAL_SUCCESS = 2051;
+    public static final int READ_CHICK_DISPOSAL_LIST_SUCCESS = 2052;
+    public static final int UPDATE_CHICK_DISPOSAL_SUCCESS = 2053;
+    public static final int DELETE_CHICK_DISPOSAL_SUCCESS = 2054;
+    public static final int READ_CHICK_DISPOSAL_TOTAL_SUCCESS = 2055;
+    
+    public static final int CREATED_CHICK_DISPOSAL_FAIL = 4050;
+    public static final int READ_CHICK_DISPOSAL_FAIL = 4051;
+    public static final int READ_CHICK_DISPOSAL_LIST_FAIL = 4052;
+    public static final int UPDATE_CHICK_DISPOSAL_FAIL = 4053;
+    public static final int DELETE_CHICK_DISPOSAL_FAIL = 4054;
+    public static final int READ_CHICK_DISPOSAL_TOTAL_FAIL = 4055;
+    
     /******************* 공통 오류 메시지 ************************/
     public static final int INTERNAL_SERVER_ERROR = 5000;
 }
