@@ -57,6 +57,7 @@ public class PrincipalDetails implements UserDetails{
 		
 		dataMap.put("usersNo", usersDto.getUsersNo());
 		dataMap.put("usersId", usersDto.getUsersId());
+		dataMap.put("usersName", usersDto.getUsersName());
 		dataMap.put("usersRole", usersDto.getUsersRole().name());//Enum 문자열로 반환
 		
 		return dataMap;
