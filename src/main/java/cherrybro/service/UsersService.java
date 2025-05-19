@@ -17,4 +17,7 @@ public interface UsersService {
 	//회원정보
 	UsersDto findUserById(Long usersNo);
 	
+	//아이디 중복 조회
+	Boolean checkUserIdDuplicate(String userId);
+	
 }

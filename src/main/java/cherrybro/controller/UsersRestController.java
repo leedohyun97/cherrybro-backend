@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cherrybro.auth.PrincipalDetails;
@@ -198,6 +199,45 @@ public class UsersRestController {
 			
 			//에러 응답 객체 반환
 			Response<UsersDto> response = new Response<>();
+			response.setStatus(ResponseStatusCode.READ_USER_FAIL);
+			response.setMessage(ResponseMessage.READ_USER_FAIL);
+			response.setData(null);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/* 아이디 중복 체크 */
+	@Operation(summary = "사용자 아이디 중복 체크")
+	@GetMapping("/check-id")
+	public ResponseEntity<Response<Boolean>> checkUserIdDuplicate(@RequestParam("usersId") String usersId) {
+		try {
+			
+			//사용자 아이디로 아이디 중복 조회
+			Boolean isDuplicate = usersService.checkUserIdDuplicate(usersId);
+			
+			//응답 객체 생성
+			Response<Boolean> response = new Response<>();
+			
+			//인코딩 타입 설정
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType(MediaType.APPLICATION_JSON, Charset.forName("UTF-8")));
+			
+			//응답 객체 설정
+			response.setStatus(ResponseStatusCode.READ_USER_SUCCESS);
+			response.setMessage(ResponseMessage.READ_USER_SUCCESS);
+			response.setData(isDuplicate);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, httpHeaders, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			
+			//에러 응답 객체 반환
+			Response<Boolean> response = new Response<>();
 			response.setStatus(ResponseStatusCode.READ_USER_FAIL);
 			response.setMessage(ResponseMessage.READ_USER_FAIL);
 			response.setData(null);

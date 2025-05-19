@@ -100,7 +100,7 @@ public class UsersServiceImpl implements UsersService {
 			//사용자 고유 번호로 회원 조회
 			Users findUser = usersRepository.findByUsersNo(usersNo)
 					//NULL값 발생 시 예외 발생
-					.orElseThrow(() -> new RuntimeException("해당 사용자를 찾을 수 없습니다."));
+					.orElseThrow(() -> new RuntimeException("이."));
 			
 			//Entity -> DTO 변환 후 반환
 			return UsersDto.toDto(findUser);
@@ -112,6 +112,25 @@ public class UsersServiceImpl implements UsersService {
 			throw new RuntimeException("회원 조회 중 오류 발생", e);
 		}
 	}
+	
+	/* 아이디 중복 검사 */
+	@Override
+	public Boolean checkUserIdDuplicate(String usersId) {
+		try {
+			//사용자 ID로 회원 조회
+			Boolean isDuplicate = usersRepository.findByUsersId(usersId).isPresent();
+			
+			//중복일 시 true 반환
+			return isDuplicate;
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			//에러 메시지 전달
+			throw new RuntimeException("회원 조회 중 오류 발생", e);
+		}
+	}
+	
 	
 	
 }
