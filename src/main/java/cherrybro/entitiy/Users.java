@@ -4,6 +4,7 @@ import java.util.List;
 
 import cherrybro.dto.UsersDto;
 import cherrybro.entitiy.role.Role;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -55,9 +56,10 @@ public class Users {
 	/************************************************************/
 	
 	/* 한 명의 사용자가 여러개의 농장 보유 가능 */
-	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Farm> farms;
 	
+	/************************************************************/
 	
 	/* DTO -> Entity */
 	public static Users toEntity(UsersDto usersDto) {
@@ -69,6 +71,13 @@ public class Users {
 				.usersPhone(usersDto.getUsersPhone())
 				.usersRole(usersDto.getUsersRole())
 				.build();
+	}
+	
+	/************************************************************/
+	
+	/* 비밀번호 찾기 시 비밀번호 재설정 */
+	public void changePassword(String newPassword) {
+		this.usersPassword = newPassword;
 	}
 	
 	

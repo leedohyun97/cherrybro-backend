@@ -8,13 +8,17 @@ public class ResponseMessage {
     public static final String READ_USER_LIST_SUCCESS = "회원 목록 조회 성공";
     public static final String UPDATE_USER_SUCCESS = "회원 수정 성공";
     public static final String DELETE_USER_SUCCESS = "회원 삭제 성공";
-
+    public static final String FIND_USER_ID_SUCCESS = "아이디 찾기 성공";
+    public static final String FIND_USER_PASSWORD_SUCCESS = "임시 비밀번호 발급 성공";
+    
     public static final String CREATED_USER_FAIL = "회원 생성 실패";
     public static final String READ_USER_FAIL = "회원 조회 실패";
     public static final String READ_USER_LIST_FAIL = "회원 목록 조회 실패";
     public static final String UPDATE_USER_FAIL = "회원 수정 실패";
     public static final String DELETE_USER_FAIL = "회원 삭제 실패";
-
+    public static final String FIND_USER_ID_FAIL = "아이디 찾기 실패";
+    public static final String FIND_USER_PASSWORD_FAIL = "임시 비밀번호 발급 실패";
+    
     /******************* FARM 메시지 ************************/
     public static final String CREATED_FARM_SUCCESS = "농장 생성 성공";
     public static final String READ_FARM_SUCCESS = "농장 조회 성공";

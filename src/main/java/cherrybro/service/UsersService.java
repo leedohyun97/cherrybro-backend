@@ -18,6 +18,12 @@ public interface UsersService {
 	UsersDto findUserById(Long usersNo);
 	
 	//아이디 중복 조회
-	Boolean checkUserIdDuplicate(String userId);
+	Boolean checkUserIdDuplicate(String usersId);
+	
+	//이메일, 이름으로 아이디 찾기
+	String findUsersIdByUserNameAndEmail(String usersName, String usersEmail);
+	
+	//아이디, 이메일로 비밀번호 찾기
+	void findUsersPasswordByUsersIdAndEmail(String usersId, String usersEmail);
 	
 }

@@ -8,13 +8,17 @@ public class ResponseStatusCode {
     public static final int READ_USER_LIST_SUCCESS = 2002;
     public static final int UPDATE_USER_SUCCESS = 2003;
     public static final int DELETE_USER_SUCCESS = 2004;
-
+    public static final int FIND_USER_ID_SUCCESS = 2005;
+    public static final int FIND_USER_PASSWORD_SUCCESS = 2006;
+    
     public static final int CREATED_USER_FAIL = 4000;
     public static final int READ_USER_FAIL = 4001;
     public static final int READ_USER_LIST_FAIL = 4002;
     public static final int UPDATE_USER_FAIL = 4003;
     public static final int DELETE_USER_FAIL = 4004;
-
+    public static final int FIND_USER_ID_FAIL = 4005;
+    public static final int FIND_USER_PASSWORD_FAIL = 4006;
+    
     /******************* FARM 메시지 ************************/
     public static final int CREATED_FARM_SUCCESS = 2010;
     public static final int READ_FARM_SUCCESS = 2011;

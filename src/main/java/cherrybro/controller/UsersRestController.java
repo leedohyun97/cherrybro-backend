@@ -81,14 +81,13 @@ public class UsersRestController {
 	
 	/* 회원 수정 */
 	@Operation(summary = "회원 수정")
-	@PutMapping("/{usersNo}")
-	public ResponseEntity<Response<UsersDto>> updateUser(@PathVariable("usersNo") Long usersNo, @RequestBody UsersDto usersDto) {
+	@PutMapping
+	public ResponseEntity<Response<UsersDto>> updateUser(Authentication authentication, @RequestBody UsersDto usersDto) {
 		try {
 			
-			//패스와 Dto의 번호가 일치하지 않을 시 에러
-			if (!usersNo.equals(usersDto.getUsersNo())) {
-			    throw new IllegalArgumentException("요청 경로와 본문 번호가 일치하지 않습니다.");
-			}
+			PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+			
+			Long usersNo = principalDetails.getUsersNo();
 			
 			//farmNo를 farmDto에 설정
 			usersDto.setUsersNo(usersNo);
@@ -240,6 +239,86 @@ public class UsersRestController {
 			Response<Boolean> response = new Response<>();
 			response.setStatus(ResponseStatusCode.READ_USER_FAIL);
 			response.setMessage(ResponseMessage.READ_USER_FAIL);
+			response.setData(null);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/* 아이디 찾기 */
+	@Operation(summary = "사용자 아이디 찾기")
+	@GetMapping("/find-id")
+	public ResponseEntity<Response<String>> findUsersIdByUsersNameAndUsersEmail(
+			@RequestParam("usersName") String usersName, @RequestParam("usersEmail") String usersEmail) {
+		try {
+			
+			//사용자 이름 + 이메일로 아이디 조회
+			String maskedId = usersService.findUsersIdByUserNameAndEmail(usersName, usersEmail);
+			
+			//응답 객체 생성
+			Response<String> response = new Response<>();
+			
+			//인코딩 타입 설정
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType(MediaType.APPLICATION_JSON, Charset.forName("UTF-8")));
+			
+			//응답 객체 설정
+			response.setStatus(ResponseStatusCode.FIND_USER_ID_SUCCESS);
+			response.setMessage(ResponseMessage.FIND_USER_ID_SUCCESS);
+			response.setData(maskedId);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, httpHeaders, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			
+			//에러 응답 객체 반환
+			Response<String> response = new Response<>();
+			response.setStatus(ResponseStatusCode.FIND_USER_ID_FAIL);
+			response.setMessage(ResponseMessage.FIND_USER_ID_FAIL);
+			response.setData(null);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/* 비밀번호 찾기 */
+	@Operation(summary = "사용자 비밀번호 찾기 (임시 비밀번호 발급)")
+	@PostMapping("/find-password")
+	public ResponseEntity<Response<Void>> findUsersPasswordByUsersIdAndUsersEmail(
+			@RequestParam("usersId") String usersId, @RequestParam("usersEmail") String usersEmail) {
+		try {
+			
+			//사용자 ID + 이메일로 비밀번호 재설정
+			usersService.findUsersPasswordByUsersIdAndEmail(usersId, usersEmail);
+			
+			//응답 객체 생성
+			Response<Void> response = new Response<>();
+			
+			//인코딩 타입 설정
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType(MediaType.APPLICATION_JSON, Charset.forName("UTF-8")));
+			
+			//응답 객체 설정
+			response.setStatus(ResponseStatusCode.FIND_USER_PASSWORD_SUCCESS);
+			response.setMessage(ResponseMessage.FIND_USER_PASSWORD_SUCCESS);
+			response.setData(null);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, httpHeaders, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			
+			//에러 응답 객체 반환
+			Response<Void> response = new Response<>();
+			response.setStatus(ResponseStatusCode.FIND_USER_PASSWORD_FAIL);
+			response.setMessage(ResponseMessage.FIND_USER_PASSWORD_FAIL);
 			response.setData(null);
 			
 			//반환할 응답Entity 생성 및 반환
