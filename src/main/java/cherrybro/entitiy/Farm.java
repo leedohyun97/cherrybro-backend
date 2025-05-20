@@ -3,6 +3,7 @@ package cherrybro.entitiy;
 import java.util.List;
 
 import cherrybro.dto.FarmDto;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -42,7 +43,7 @@ public class Farm {
 	/************************************************************/
 
 	/* 한 농장이 여러개의 농장동 보유 가능 */
-	@OneToMany(mappedBy = "farm", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "farm", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<FarmSection> farmSections;
 
 	/************************************************************/
