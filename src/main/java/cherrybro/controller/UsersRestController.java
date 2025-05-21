@@ -248,10 +248,14 @@ public class UsersRestController {
 	
 	/* 아이디 찾기 */
 	@Operation(summary = "사용자 아이디 찾기")
-	@GetMapping("/find-id")
+	@PostMapping("/find-id")
 	public ResponseEntity<Response<String>> findUsersIdByUsersNameAndUsersEmail(
-			@RequestParam("usersName") String usersName, @RequestParam("usersEmail") String usersEmail) {
+			@RequestBody UsersDto.FindIdDto findIdDto) {
 		try {
+			
+			String usersName = findIdDto.getUsersName();
+			
+			String usersEmail = findIdDto.getUsersEmail();
 			
 			//사용자 이름 + 이메일로 아이디 조회
 			String maskedId = usersService.findUsersIdByUserNameAndEmail(usersName, usersEmail);
@@ -290,8 +294,11 @@ public class UsersRestController {
 	@Operation(summary = "사용자 비밀번호 찾기 (임시 비밀번호 발급)")
 	@PostMapping("/find-password")
 	public ResponseEntity<Response<Void>> findUsersPasswordByUsersIdAndUsersEmail(
-			@RequestParam("usersId") String usersId, @RequestParam("usersEmail") String usersEmail) {
+			@RequestBody UsersDto.FindPasswordDto findPasswordDto) {
 		try {
+			String usersId = findPasswordDto.getUsersId();
+			
+			String usersEmail = findPasswordDto.getUsersEmail();
 			
 			//사용자 ID + 이메일로 비밀번호 재설정
 			usersService.findUsersPasswordByUsersIdAndEmail(usersId, usersEmail);
