@@ -36,8 +36,8 @@ public class ChickDeathRestController {
 	
 	private final ChickDeathService chickDeathService;
 	
-	/* 도태폐기 등록 */
-	@Operation(summary = "도태폐기 등록")
+	/* 폐사 등록 */
+	@Operation(summary = "폐사 등록")
 	@PostMapping
 	public ResponseEntity<Response<ChickDeathDto>> createChickDeath(@RequestBody ChickDeathDto chickDeathDto) {
 		try {
@@ -74,8 +74,8 @@ public class ChickDeathRestController {
 		}
 	}
 	
-	/* 도태폐기 수정 */
-	@Operation(summary = "도태폐기 수정")
+	/* 폐사 수정 */
+	@Operation(summary = "폐사 수정")
 	@PutMapping("/{chickDeathNo}")
 	public ResponseEntity<Response<ChickDeathDto>> updateChickDeath(@PathVariable("chickDeathNo") Long chickDeathNo, @RequestBody ChickDeathDto chickDeathDto) {
 		try {
@@ -120,8 +120,8 @@ public class ChickDeathRestController {
 		}
 	}
 	
-	/* 도태폐기 삭제 */
-	@Operation(summary = "도태폐기 삭제")
+	/* 폐사 삭제 */
+	@Operation(summary = "폐사 삭제")
 	@DeleteMapping("/{chickDeathNo}")
 	public ResponseEntity<Response<ChickDeathDto>> deleteChickDeath(@PathVariable("chickDeathNo") Long chickDeathNo) {
 		try {
@@ -158,12 +158,12 @@ public class ChickDeathRestController {
 		}
 	}
 
-	/* 도태폐기 조회 */
-	@Operation(summary = "도태폐기 조회")
+	/* 폐사 조회 */
+	@Operation(summary = "폐사 조회")
 	@GetMapping("/{chickDeathNo}")
 	public ResponseEntity<Response<ChickDeathDto>> getChickDeath(@PathVariable("chickDeathNo") Long chickDeathNo) {
 		try {
-			//도태폐기 번호로 도태폐기 조회
+			//폐사 번호로 폐사 조회
 			ChickDeathDto chickDeathDto = chickDeathService.findChickDeathById(chickDeathNo);
 			
 			//응답 객체 생성
@@ -197,13 +197,13 @@ public class ChickDeathRestController {
 	}
 	
 	
-	/* 도태폐기 리스트 조회 */
-	@Operation(summary = "도태폐기 목록 조회")
+	/* 농장동 번호로 폐사 리스트 조회 */
+	@Operation(summary = "농장동 번호로 폐사 목록 조회")
 	@GetMapping("/list")
 	public ResponseEntity<Response<List<ChickDeathDto>>> getChickDeathsByFarmSection(@RequestParam("farmSectionNo") Long farmSectionNo) {
 		try {
 			
-			//농장동 번호로 도태폐기 조회
+			//농장동 번호로 폐사 조회
 			List<ChickDeathDto> chickDeathDtoList = chickDeathService.findChickDeathByFarmSectionNo(farmSectionNo);;
 			
 			//응답 객체 생성
@@ -237,13 +237,13 @@ public class ChickDeathRestController {
 	}
 	
 	
-	/* 도태폐기 리스트 조회 */
-	@Operation(summary = "모든 도태폐기 목록 조회(관리자용)")
+	/* 폐사 리스트 조회 */
+	@Operation(summary = "모든 폐사 목록 조회(관리자용)")
 	@GetMapping("/list/all")
 	public ResponseEntity<Response<List<ChickDeathDto>>> getAllChickDeath() {
 		try {
 			
-			//농장동 번호로 도태폐기 조회
+			//농장동 번호로 폐사 조회
 			List<ChickDeathDto> chickDeathDtoList = chickDeathService.findAllChickDeath();
 			
 			//응답 객체 생성
