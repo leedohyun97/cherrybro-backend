@@ -50,4 +50,23 @@ public class UsersDto {
 				.build();
 	}
 	
+	/* 아이디 찾기용 DTO */
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	@Builder
+	public static class FindIdDto {
+		private String usersName;
+		private String usersEmail;
+	}
+	
+	/* 비밀번호 찾기용 DTO */
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	@Builder
+	public static class FindPasswordDto {
+		private String usersId;
+		private String usersEmail;
+	}
 }
