@@ -47,9 +47,14 @@ public class JWTCheckFilter extends OncePerRequestFilter {
                 || path.startsWith("/favicon.ico")
                 || path.startsWith("/v3/api-docs")
                 || path.startsWith("/main")
-                || path.startsWith("/users")
+                /* || path.startsWith("/users") */
                 || path.startsWith("/login")
-                || path.startsWith("/logout")) {
+                || path.startsWith("/logout")
+                /* 임시 */
+                || path.startsWith("/chickEntry")
+                || path.startsWith("/chickDisposal")
+                || path.startsWith("/chickDeath")
+                || path.startsWith("/farmSection")) {
             return true;
         }
 
