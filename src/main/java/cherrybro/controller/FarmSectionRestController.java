@@ -4,6 +4,8 @@ package cherrybro.controller;
 import java.nio.charset.Charset;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -265,6 +267,45 @@ public class FarmSectionRestController {
 			
 			//에러 응답 객체 반환
 			Response<List<FarmSectionDto>> response = new Response<>();
+			response.setStatus(ResponseStatusCode.READ_FARM_SECTION_LIST_FAIL);
+			response.setMessage(ResponseMessage.READ_FARM_SECTION_LIST_FAIL);
+			response.setData(null);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/* 농장동 리스트(페이징) 조회 */
+	@Operation(summary = "농장동 목록(페이징) 조회")
+	@GetMapping("/list/page")
+	public ResponseEntity<Response<Page<FarmSectionDto>>> getAllFarmSectionPage(Pageable pageable) {
+		try {
+			
+			//농장동 리스트 조회
+			Page<FarmSectionDto> farmSectionDtoPage = farmSectionService.getAllFarmSectionPage(pageable);
+			
+			//응답 객체 생성
+			Response<Page<FarmSectionDto>> response = new Response<>();
+			
+			//인코딩 타입 설정
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType(MediaType.APPLICATION_JSON, Charset.forName("UTF-8")));
+			
+			//응답 객체 설정
+			response.setStatus(ResponseStatusCode.READ_FARM_SECTION_LIST_SUCCESS);
+			response.setMessage(ResponseMessage.READ_FARM_SECTION_LIST_SUCCESS);
+			response.setData(farmSectionDtoPage);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, httpHeaders, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			
+			//에러 응답 객체 반환
+			Response<Page<FarmSectionDto>> response = new Response<>();
 			response.setStatus(ResponseStatusCode.READ_FARM_SECTION_LIST_FAIL);
 			response.setMessage(ResponseMessage.READ_FARM_SECTION_LIST_FAIL);
 			response.setData(null);

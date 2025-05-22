@@ -2,6 +2,9 @@ package cherrybro.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import cherrybro.dto.FarmSectionDto;
 import cherrybro.entitiy.FarmSection;
 
@@ -24,5 +27,8 @@ public interface FarmSectionService {
 	
 	//사용자 번호로 농장동 리스트 가져오기
 	List<FarmSectionDto> findFarmSectionsByFarmNo(Long farmNo);
+	
+	//농장동 리스트 가져오기(페이징)
+	Page<FarmSectionDto> getAllFarmSectionPage(Pageable pageable);
 	
 }

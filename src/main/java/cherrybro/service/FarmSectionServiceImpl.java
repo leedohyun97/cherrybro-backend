@@ -1,6 +1,9 @@
 package cherrybro.service;
 
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import cherrybro.dto.FarmSectionDto;
 import cherrybro.entitiy.FarmSection;
@@ -141,6 +144,23 @@ public class FarmSectionServiceImpl implements FarmSectionService {
 			e.printStackTrace();
 			//에러 메시지 전달
 			throw new RuntimeException("농장 고유 번호로 농장동 리스트 조회 중 오류 발생", e);
+		}
+	}
+	
+	//농장동 페이징
+	@Override
+	public Page<FarmSectionDto> getAllFarmSectionPage(Pageable pageable) {
+		try {
+			
+			Page<FarmSectionDto> farmSectionDto = farmSectionRepository.findAll(pageable).map(FarmSectionDto::toDto);
+
+			return farmSectionDto;
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			//에러 메시지 전달
+			throw new RuntimeException("농장동 리스트(페이징) 조회 중 오류 발생", e);
 		}
 	}
 	
