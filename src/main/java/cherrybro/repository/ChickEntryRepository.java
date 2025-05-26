@@ -24,4 +24,9 @@ public interface ChickEntryRepository extends JpaRepository<ChickEntry, Long>{
 			+ "WHERE c.farmSection.farmSectionNo = :farmSectionNo"	//매개변수로 받은 농장동 번호와 일치하는 데이터만 조회
 			)
 	Integer getTotalChickEntryNumberByFarmSectionNo(@Param("farmSectionNo") Long farmSectionNo);
+	
+	//농장 번호로 입추 내역 조회(농장동이 참조하는 농장의 농장번호)
+	List<ChickEntry> findByFarmSection_Farm_FarmNo(Long farmNo);
+
+	
 }

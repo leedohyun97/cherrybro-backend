@@ -27,4 +27,7 @@ public interface ChickEntryService {
 	
 	// 농장동별 누적 입추합 조회, 없으면 0 반환
 	Integer getTotalChickEntryNumberByFarmSectionNo(Long farmSectionNo);
+	
+	//농장 번호로 입추 내역 조회(농장동이 참조하는 농장의 농장번호)
+	List<ChickEntryDto> findByFarmSection_Farm_FarmNo(Long farmNo);
 }

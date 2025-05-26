@@ -313,4 +313,42 @@ public class ChickEntryRestController {
 		}
 	}
 	
+	/* 농장 번호로 입추 수 내역 조회 */
+	@Operation(summary = "농장 번호로 입추 수 내역 조회")
+	@GetMapping("/list/detail")
+	public ResponseEntity<Response<List<ChickEntryDto>>> findByFarmSectionFarmFarmNo(@RequestParam("farmNo") Long farmNo) {
+		try {
+			
+			List<ChickEntryDto> chickEntryDtoList = chickEntryService.findByFarmSection_Farm_FarmNo(farmNo);
+			
+			//응답 객체 생성
+			Response<List<ChickEntryDto>> response = new Response<>();
+			
+			//인코딩 타입 설정
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType(MediaType.APPLICATION_JSON, Charset.forName("UTF-8")));
+			
+			//응답 객체 설정
+			response.setStatus(ResponseStatusCode.READ_CHICK_ENTRY_BY_FARM_NO_SUCCESS);
+			response.setMessage(ResponseMessage.READ_CHICK_ENTRY_BY_FARM_NO_SUCCESS);
+			response.setData(chickEntryDtoList);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, httpHeaders, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			
+			//에러 응답 객체 반환
+			Response<List<ChickEntryDto>> response = new Response<>();
+			response.setStatus(ResponseStatusCode.READ_CHICK_ENTRY_BY_FARM_NO_FAIL);
+			response.setMessage(ResponseMessage.READ_CHICK_ENTRY_BY_FARM_NO_FAIL);
+			response.setData(null);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 }

@@ -13,7 +13,7 @@ public class ChickEntryServiceImpl implements ChickEntryService {
 	
 	private final ChickEntryRepository chickEntryRepository;
 	
-	/* 입추수수 저장 */
+	/* 입추 수 저장 */
 	@Override
 	public ChickEntryDto saveChickEntry(ChickEntryDto chickEntryDto) {
 		try {
@@ -31,19 +31,19 @@ public class ChickEntryServiceImpl implements ChickEntryService {
 			//에러 로그 출력
 			e.printStackTrace();
 			//에러 메시지 전달
-	        throw new RuntimeException("입추수수 저장 중 오류 발생", e);
+	        throw new RuntimeException("입추 수 저장 중 오류 발생", e);
 		}
 	}
 	
-	/* 입추수수 수정 */
+	/* 입추 수 수정 */
 	@Override
 	public ChickEntryDto updateChickEntry(ChickEntryDto chickEntryDto) {
 	    try {
-	    	//수정할 입추수수 조회
+	    	//수정할 입추 수 조회
 	        ChickEntry chickEntry = chickEntryRepository.findByChickEntryNo(chickEntryDto.getChickEntryNo())
-	                .orElseThrow(() -> new RuntimeException("해당 입추수수를 찾을 수 없습니다."));
+	                .orElseThrow(() -> new RuntimeException("해당 입추 수를 찾을 수 없습니다."));
 	        
-	        //입추수수(마리) 수정
+	        //입추 수(마리) 수정
 	        chickEntry.setChickEntryNumber(chickEntryDto.getChickEntryNumber());
 	        //입추일자 수정
 	        chickEntry.setChickEntryDate(chickEntryDto.getChickEntryDate());
@@ -58,18 +58,18 @@ public class ChickEntryServiceImpl implements ChickEntryService {
 			//에러 로그 출력
 			e.printStackTrace();
 			//에러 메시지 전달
-	        throw new RuntimeException("입추수수 수정 중 오류 발생", e);
+	        throw new RuntimeException("입추 수 수정 중 오류 발생", e);
 	    }
 	}
 
-	/* 입추수수 삭제 */
+	/* 입추 수 삭제 */
 	@Override
 	public ChickEntryDto deleteChickEntryById(Long chickEntryNo) {
 	    try {
 	    	
-	    	//삭제할 입추수수 조회
+	    	//삭제할 입추 수 조회
 	        ChickEntry chickEntry = chickEntryRepository.findByChickEntryNo(chickEntryNo)
-	                .orElseThrow(() -> new RuntimeException("해당 입추수수를 찾을 수 없습니다."));
+	                .orElseThrow(() -> new RuntimeException("해당 입추 수를 찾을 수 없습니다."));
 
 	        chickEntryRepository.delete(chickEntry);
 	        
@@ -79,18 +79,18 @@ public class ChickEntryServiceImpl implements ChickEntryService {
 			//에러 로그 출력
 			e.printStackTrace();
 			//에러 메시지 전달
-	        throw new RuntimeException("입추수수 삭제 중 오류 발생", e);
+	        throw new RuntimeException("입추 수 삭제 중 오류 발생", e);
 	    }
 	}
 	
-	/* 입추수수 조회 */
+	/* 입추 수 조회 */
 	@Override
 	public ChickEntryDto findChickEntryById(Long chickEntryNo) {
 		try {
 			//농장 고유 번호로 농장 조회
 			ChickEntry findChickEntry = chickEntryRepository.findByChickEntryNo(chickEntryNo)
 					//NULL값 발생 시 예외 발생
-					.orElseThrow(() -> new RuntimeException("해당 입추수수를 찾을 수 없습니다."));
+					.orElseThrow(() -> new RuntimeException("해당 입추 수를 찾을 수 없습니다."));
 			
 			//Entity -> DTO 변환 후 반환
 			return ChickEntryDto.toDto(findChickEntry);
@@ -99,15 +99,15 @@ public class ChickEntryServiceImpl implements ChickEntryService {
 			//에러 로그 출력
 			e.printStackTrace();
 			//에러 메시지 전달
-			throw new RuntimeException("입추수수 조회 중 오류 발생", e);
+			throw new RuntimeException("입추 수 조회 중 오류 발생", e);
 		}
 	}
 	
-	/* 농장동 고유 번호로 입추수수 리스트 조회 */
+	/* 농장동 고유 번호로 입추 수 리스트 조회 */
 	@Override
 	public List<ChickEntryDto> findChickEntriesByFarmSectionNo(Long farmSectionNo) {
 		try {
-			//농장 고유 번호로 입추수수 리스트 조회
+			//농장 고유 번호로 입추 수 리스트 조회
 			List<ChickEntry> chickEntrys = chickEntryRepository.findAllByFarmSection_FarmSectionNo(farmSectionNo);
 			
 			//Stream을 사용해 Entity -> DTO 변환 후 반환
@@ -119,14 +119,15 @@ public class ChickEntryServiceImpl implements ChickEntryService {
 			//에러 로그 출력
 			e.printStackTrace();
 			//에러 메시지 전달
-			throw new RuntimeException("농장동 고유 번호로 입추수수 리스트 조회 중 오류 발생", e);
+			throw new RuntimeException("농장동 고유 번호로 입추 수 리스트 조회 중 오류 발생", e);
 		}
 	}
-
+	
+	/* 모든 입추 수 리스트 조회 */
 	@Override
 	public List<ChickEntryDto> findAllChickEntries() {
 		try {
-			//모든 입추수수 리스트 조회
+			//모든 입추 수 리스트 조회
 			List<ChickEntry> chickEntries = chickEntryRepository.findAll();
 			
 			//Stream을 사용해 Entity -> DTO 변환 후 반환
@@ -138,10 +139,11 @@ public class ChickEntryServiceImpl implements ChickEntryService {
 			//에러 로그 출력
 			e.printStackTrace();
 			//에러 메시지 전달
-			throw new RuntimeException("모든 입추수수 리스트 조회 중 오류 발생", e);
+			throw new RuntimeException("모든 입추 수 리스트 조회 중 오류 발생", e);
 		}
 	}
-
+	
+	/* 농장동 고유 번호로 입추 수 누적합 조회 */
 	@Override
 	public Integer getTotalChickEntryNumberByFarmSectionNo(Long farmSectionNo) {
 		try {
@@ -154,7 +156,25 @@ public class ChickEntryServiceImpl implements ChickEntryService {
 			//에러 로그 출력
 			e.printStackTrace();
 			//에러 메시지 전달
-			throw new RuntimeException("입추수수 누적합 조회 중 오류 발생", e);
+			throw new RuntimeException("입추 수 누적합 조회 중 오류 발생", e);
+		}
+	}
+
+	/* 농장 고유 번호로 입추 수 리스트 조회 */
+	@Override
+	public List<ChickEntryDto> findByFarmSection_Farm_FarmNo(Long farmNo) {
+		try {
+			//농장 번호로 입추 수 리스트 조회
+			List<ChickEntry> chickEntry = chickEntryRepository.findByFarmSection_Farm_FarmNo(farmNo); 
+			
+			//리스트 DTO로 변환해서 반환
+			return chickEntry.stream().map(ChickEntryDto::toDto).toList();
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			//에러 메시지 전달
+			throw new RuntimeException("농장 고유 번호로 입추 수 리스트 조회 중 오류 발생", e);
 		}
 	}
 
