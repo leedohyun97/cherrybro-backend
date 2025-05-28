@@ -246,6 +246,47 @@ public class FarmRestController {
 		}
 	}
 	
+	/* 농장 조회 */
+	@Operation(summary = "농장 번호로 농장 조회(관리자)")
+	@SecurityRequirement(name = "BearerAuth") // 인증 토큰 필요 명시
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/by-farmNo/{farmNo}")
+	public ResponseEntity<Response<FarmDto>> getFarmByFarmNo(Authentication authentication, @PathVariable("farmNo") Long farmNo) {
+		try {
+			
+			//사용자 번호로 사용자 조회
+			FarmDto farmDto = farmService.findFarmById(farmNo);
+			
+			//응답 객체 생성
+			Response<FarmDto> response = new Response<>();
+			
+			//인코딩 타입 설정
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.setContentType(new MediaType(MediaType.APPLICATION_JSON, Charset.forName("UTF-8")));
+			
+			//응답 객체 설정
+			response.setStatus(ResponseStatusCode.READ_FARM_SUCCESS);
+			response.setMessage(ResponseMessage.READ_FARM_SUCCESS);
+			response.setData(farmDto);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, httpHeaders, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			//에러 로그 출력
+			e.printStackTrace();
+			
+			//에러 응답 객체 반환
+			Response<FarmDto> response = new Response<>();
+			response.setStatus(ResponseStatusCode.READ_FARM_FAIL);
+			response.setMessage(ResponseMessage.READ_FARM_FAIL);
+			response.setData(null);
+			
+			//반환할 응답Entity 생성 및 반환
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	
 	/* 농장 리스트 조회 */
 	@Operation(summary = "농장 목록 조회(관리자용)")
