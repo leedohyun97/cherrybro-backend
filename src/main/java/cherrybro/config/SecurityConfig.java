@@ -20,6 +20,7 @@ import cherrybro.auth.PrincipalDetailsService;
 import cherrybro.security.filter.JWTCheckFilter;
 import cherrybro.security.handler.APILoginFailHandler;
 import cherrybro.security.handler.APILoginSuccessHandler;
+import cherrybro.security.handler.CustomAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 
 @Configuration //Spring 설정 클래스임을 명시
@@ -28,9 +29,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor //final 필드를 자동 생성자 주입
 public class SecurityConfig {
 
-    // 사용자 인증을 처리하는 UserDetailsService 구현체
+    //사용자 인증을 처리하는 UserDetailsService 구현체
     private final PrincipalDetailsService principalDetailsService;
-
+    
+    //TOKEN 에러 시 커스텀 에러
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    
     // Spring Security의 핵심 보안 설정 필터 체인 정의
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -69,12 +73,14 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(auth -> auth
 //        	    .requestMatchers(HttpMethod.POST, "/users").permitAll() // 회원가입 허용
 //        	    .requestMatchers("/login", "/logout").permitAll() //로그인, 로그아웃 허용
-//        	    .requestMatchers("/farm-section", "/chickEntry", "/chickDeath").permitAll() //로그인, 로그아웃 허용
+//        	    .requestMatchers("/farm-section", "/chickEntry", "/chickDeath").permitAll()
 //        	    .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 //        	    .anyRequest().authenticated() // 나머지는 인증 필요
         	    .anyRequest().permitAll()
         	);
-
+        
+        httpSecurity.exceptionHandling(ex -> ex.authenticationEntryPoint(customAuthenticationEntryPoint));
+        
         return httpSecurity.build(); // 필터 체인 반환
     }
 

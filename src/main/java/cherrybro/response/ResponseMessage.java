@@ -52,6 +52,7 @@ public class ResponseMessage {
     public static final String UPDATE_CHICK_ENTRY_SUCCESS = "입추수수 수정 성공";
     public static final String DELETE_CHICK_ENTRY_SUCCESS = "입추수수 삭제 성공";
     public static final String READ_CHICK_ENTRY_TOTAL_SUCCESS = "입추수수 누적합 조회 성공";
+    public static final String READ_CHICK_ENTRY_BY_FARM_NO_SUCCESS = "농장 번호로 입추 내역 조회 성공";
     
     public static final String CREATED_CHICK_ENTRY_FAIL = "입추수수 등록 실패";
     public static final String READ_CHICK_ENTRY_FAIL = "입추수수 조회 실패";
@@ -59,6 +60,7 @@ public class ResponseMessage {
     public static final String UPDATE_CHICK_ENTRY_FAIL = "입추수수 수정 실패";
     public static final String DELETE_CHICK_ENTRY_FAIL = "입추수수 삭제 실패";
     public static final String READ_CHICK_ENTRY_TOTAL_FAIL = "입추수수 누적합 조회 실패";
+    public static final String READ_CHICK_ENTRY_BY_FARM_NO_FAIL = "농장 번호로 입추 내역 조회 실패";
     
     /******************* CHICK_DEATH 메시지 ************************/
     public static final String CREATED_CHICK_DEATH_SUCCESS = "폐사 등록 성공";

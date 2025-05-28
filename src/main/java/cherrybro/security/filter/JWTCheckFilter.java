@@ -118,11 +118,15 @@ public class JWTCheckFilter extends OncePerRequestFilter {
 
             //에러 응답 JSON 생성 및 전송
             Gson gson = new Gson();
-            String msg = gson.toJson(Map.of("error", "ERROR_ACCESS_TOKEN"));
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json;charset=UTF-8");
+            String msg = gson.toJson(Map.of("errorCode", "EXPIRED_TOKEN", "message", "토큰이 만료되었거나 유효하지 않습니다"));
             response.setContentType("application/json");
             PrintWriter printWriter = response.getWriter();
             printWriter.println(msg);
             printWriter.close();
+            
+            return;
         }
     }
 }

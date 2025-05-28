@@ -52,6 +52,7 @@ public class ResponseStatusCode {
     public static final int UPDATE_CHICK_ENTRY_SUCCESS = 2033;
     public static final int DELETE_CHICK_ENTRY_SUCCESS = 2034;
     public static final int READ_CHICK_ENTRY_TOTAL_SUCCESS = 2035;
+    public static final int READ_CHICK_ENTRY_BY_FARM_NO_SUCCESS = 2036;
     
     public static final int CREATED_CHICK_ENTRY_FAIL = 4030;
     public static final int READ_CHICK_ENTRY_FAIL = 4031;
@@ -59,6 +60,7 @@ public class ResponseStatusCode {
     public static final int UPDATE_CHICK_ENTRY_FAIL = 4033;
     public static final int DELETE_CHICK_ENTRY_FAIL = 4034;	
     public static final int READ_CHICK_ENTRY_TOTAL_FAIL = 4035;
+    public static final int READ_CHICK_ENTRY_BY_FARM_NO_FAIL = 4036;
     
     /******************* CHICK_DEATH 메시지 ************************/
     public static final int CREATED_CHICK_DEATH_SUCCESS = 2040;
